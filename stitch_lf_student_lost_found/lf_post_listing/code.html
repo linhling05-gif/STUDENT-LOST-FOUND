@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng tin - LF University</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-surface": "#161d1f",
+                "on-primary-fixed-variant": "#653851",
+                "tertiary-container": "#dec7cf",
+                "secondary-fixed": "#e2e2e2",
+                "error-container": "#ffdad6",
+                "tertiary-fixed-dim": "#d7c1c8",
+                "secondary": "#5d5f5f",
+                "surface-dim": "#d4dbdd",
+                "secondary-fixed-dim": "#c6c6c7",
+                "on-primary-fixed": "#330d24",
+                "on-primary": "#ffffff",
+                "on-surface-variant": "#4f4449",
+                "inverse-surface": "#2b3234",
+                "on-secondary-fixed": "#1a1c1c",
+                "on-primary-container": "#774861",
+                "on-secondary-container": "#616363",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-fixed": "#25181e",
+                "inverse-on-surface": "#ebf2f4",
+                "on-tertiary-fixed-variant": "#524249",
+                "surface-container-highest": "#dde4e6",
+                "primary-fixed-dim": "#f2b5d3",
+                "primary": "#804f69",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed": "#f4dce4",
+                "surface-container": "#e8eff1",
+                "outline": "#817379",
+                "surface-container-low": "#eef5f7",
+                "on-error": "#ffffff",
+                "primary-container": "#f8bbd9",
+                "on-secondary-fixed-variant": "#454747",
+                "on-secondary": "#ffffff",
+                "secondary-container": "#dfe0e0",
+                "inverse-primary": "#f2b5d3",
+                "outline-variant": "#d3c2c8",
+                "surface-variant": "#dde4e6",
+                "tertiary": "#6b5a60",
+                "on-error-container": "#93000a",
+                "on-tertiary-container": "#635259",
+                "surface-container-high": "#e2e9ec",
+                "on-background": "#161d1f",
+                "background": "#f4fafd",
+                "primary-fixed": "#ffd8e9",
+                "surface-bright": "#f4fafd",
+                "error": "#ba1a1a",
+                "surface-tint": "#804f69",
+                "surface": "#f4fafd"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "gutter": "16px",
+                "xl": "32px",
+                "md": "16px",
+                "xs": "4px",
+                "sm": "8px",
+                "base": "8px",
+                "lg": "24px",
+                "container-margin": "20px"
+            },
+            "fontFamily": {
+                "body-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "headline-lg-mobile": ["Inter"],
+                "label-md": ["Inter"],
+                "headline-lg": ["Inter"],
+                "headline-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4fafd;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #804f69;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(128, 79, 105, 0.1);
+        }
+
+        .step-inactive { opacity: 0; pointer-events: none; position: absolute; transform: translateY(10px); }
+        .step-active { opacity: 1; pointer-events: auto; position: relative; transform: translateY(0); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .primary-gradient {
+            background: linear-gradient(135deg, #f8bbd9 0%, #ffd8e9 100%);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- Global Background Elements -->
+<div class="fixed inset-0 z-[-1] overflow-hidden">
+<div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-container/20 rounded-full blur-[120px] animate-float" style="animation-delay: 0s;"></div>
+<div class="absolute top-[40%] -right-[10%] w-[40%] h-[40%] bg-tertiary-container/30 rounded-full blur-[100px] animate-float" style="animation-delay: -2s;"></div>
+<div class="absolute -bottom-[10%] left-[20%] w-[35%] h-[35%] bg-primary-fixed/20 rounded-full blur-[80px] animate-float" style="animation-delay: -4s;"></div>
+</div>
+<!-- Header (Shared Component: TopNavBar) -->
+<nav class="fixed top-0 w-full z-50 bg-white/60 dark:bg-on-surface/60 backdrop-blur-xl border-b border-white/30 dark:border-white/10 shadow-sm">
+<div class="flex justify-between items-center h-20 px-container-margin max-w-7xl mx-auto">
+<div class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed-dim">LF</div>
+<div class="hidden md:flex gap-lg items-center">
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md" href="#">Lost Items</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md" href="#">Found Items</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-md text-label-md" href="#">Guide</a>
+</div>
+<div class="flex gap-md items-center">
+<button class="text-primary font-label-md text-label-md hover:scale-105 transition-transform duration-300">Login</button>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all shadow-sm">Post Listing</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="pt-32 pb-xl px-container-margin max-w-3xl mx-auto min-h-screen">
+<!-- Page Title -->
+<header class="mb-xl text-center">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-xs">Đăng tin mới</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Hãy cung cấp thông tin chi tiết để vật phẩm dễ dàng được tìm thấy.</p>
+</header>
+<!-- Stepper Indicator -->
+<div class="flex justify-between mb-xl relative max-w-md mx-auto">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-outline-variant/30 -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-0 h-[2px] bg-primary -translate-y-1/2 z-0 transition-all duration-500" id="step-line"></div>
+<div class="step-dot z-10 flex flex-col items-center gap-xs" data-step="1">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-primary text-on-primary shadow-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">info</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">Thông tin</span>
+</div>
+<div class="step-dot z-10 flex flex-col items-center gap-xs" data-step="2">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-white glass-card text-on-surface-variant transition-colors border-none">
+<span class="material-symbols-outlined text-[20px]">image</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hình ảnh</span>
+</div>
+<div class="step-dot z-10 flex flex-col items-center gap-xs" data-step="3">
+<div class="w-10 h-10 rounded-full flex items-center justify-center bg-white glass-card text-on-surface-variant transition-colors border-none">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Xác nhận</span>
+</div>
+</div>
+<!-- Form Container -->
+<div class="glass-card p-lg md:p-xl shadow-xl">
+<form id="post-listing-form">
+<!-- STEP 1: INFORMATION -->
+<div class="step-active space-y-lg" id="form-step-1">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="col-span-full">
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Tiêu đề tin đăng *</label>
+<input class="w-full h-12 rounded-xl glass-input px-md font-body-md text-body-md" placeholder="Ví dụ: Tìm thấy Ví màu đen tại sảnh A" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Danh mục *</label>
+<select class="w-full h-12 rounded-xl glass-input px-md font-body-md text-body-md appearance-none" required="">
+<option disabled="" selected="" value="">Chọn danh mục</option>
+<option>Đồ dùng cá nhân</option>
+<option>Thiết bị điện tử</option>
+<option>Giấy tờ tùy thân</option>
+<option>Thẻ sinh viên</option>
+<option>Khác</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Loại tin *</label>
+<div class="flex gap-sm h-12">
+<button class="flex-1 rounded-xl glass-input font-label-md text-label-md hover:bg-primary-container/20 border-primary text-primary border-2" type="button">Làm mất</button>
+<button class="flex-1 rounded-xl glass-input font-label-md text-label-md hover:bg-primary-container/20 text-on-surface-variant" type="button">Nhặt được</button>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Tòa nhà / Khoa *</label>
+<input class="w-full h-12 rounded-xl glass-input px-md font-body-md text-body-md" placeholder="Nhập tên tòa nhà hoặc khoa" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Ngày xảy ra *</label>
+<input class="w-full h-12 rounded-xl glass-input px-md font-body-md text-body-md" required="" type="date"/>
+</div>
+<div class="col-span-full">
+<label class="block font-label-md text-label-md text-on-surface mb-xs">Mô tả chi tiết *</label>
+<textarea class="w-full rounded-xl glass-input p-md font-body-md text-body-md" placeholder="Mô tả đặc điểm nhận dạng, vị trí cụ thể..." required="" rows="4"></textarea>
+</div>
+</div>
+<div class="flex justify-end pt-md">
+<button class="bg-primary text-on-primary px-xl py-md rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all flex items-center gap-sm" onclick="goToStep(2)" type="button">
+                            Tiếp theo
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- STEP 2: IMAGES -->
+<div class="step-inactive space-y-lg" id="form-step-2">
+<div class="space-y-md">
+<label class="block font-label-md text-label-md text-on-surface">Tải lên hình ảnh vật phẩm</label>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-2xl p-xl flex flex-col items-center justify-center bg-white/20 hover:bg-white/40 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-[48px] text-primary mb-md group-hover:scale-110 transition-transform">cloud_upload</span>
+<p class="font-body-md text-body-md text-on-surface-variant text-center">Kéo thả ảnh vào đây hoặc <span class="text-primary font-bold">chọn tệp</span></p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs opacity-60">Hỗ trợ JPG, PNG (Tối đa 5MB)</p>
+<input class="hidden" id="image-upload" multiple="" type="file"/>
+</div>
+<div class="grid grid-cols-3 gap-md mt-lg" id="image-preview-grid">
+<!-- Image previews would go here -->
+<div class="aspect-square rounded-xl glass-card overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="A clean, minimalist product photography shot of a sleek black leather wallet on a light pink textured background, soft studio lighting, high resolution" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_BuN5evhfTOak6MbBNwZjwKSheU_SlJEguiiJNG7_jmljsFAf_ogA_uX1ZLdVFHl8X5QOMPenjDXCn1NEXDLoMl5afbpTknQEDfq6g-s__Uw356teo_vr4Be92RoFlF-x-kdBRN2lbuKz4FX6Ofmm3PPUP9m2OATLQTUlNbUUYNofcsb-5q0FfcSpXaU-a8EKFteFUsmmdxY2tjXHYVO9luTx_AhhCT_kd8o3pJ3Sy7Qt2QSjg86YBugBlWvbAuPI12_vRRybk6Y"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="text-white bg-error rounded-full p-xs">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+</div>
+<div class="aspect-square rounded-xl border-2 border-dashed border-outline-variant/30 flex items-center justify-center bg-white/10">
+<span class="material-symbols-outlined text-outline-variant">add_photo_alternate</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between pt-md">
+<button class="text-on-surface-variant px-xl py-md rounded-full font-label-md text-label-md hover:bg-black/5 transition-all flex items-center gap-sm" onclick="goToStep(1)" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Quay lại
+                        </button>
+<button class="bg-primary text-on-primary px-xl py-md rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all flex items-center gap-sm" onclick="goToStep(3)" type="button">
+                            Xem lại tin
+                            <span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- STEP 3: CONFIRMATION -->
+<div class="step-inactive space-y-lg" id="form-step-3">
+<div class="bg-primary/5 rounded-2xl p-lg border border-primary/10">
+<h3 class="font-headline-md text-headline-md text-primary mb-md">Xem trước tin đăng</h3>
+<div class="space-y-md">
+<div class="flex justify-between items-start border-b border-outline-variant/20 pb-md">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface" id="preview-title">Tìm thấy Ví màu đen tại sảnh A</h4>
+<span class="inline-block mt-xs bg-primary-container text-on-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm">Đồ dùng cá nhân • Nhặt được</span>
+</div>
+<div class="text-right">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ngày nhặt: 24/10/2024</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Vị trí: Tòa A1 - Khoa CNTT</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                                Tôi có nhặt được một chiếc ví nam màu đen của hãng Calvin Klein tại khu vực ghế chờ sảnh A1. Bên trong có thẻ sinh viên mang tên Nguyễn Văn A và một số giấy tờ tùy thân khác. Các bạn vui lòng liên hệ để nhận lại nhé.
+                            </p>
+</div>
+</div>
+<div class="flex items-center gap-sm p-md rounded-xl bg-surface-container-low border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tin đăng sẽ được kiểm duyệt trước khi hiển thị công khai trên hệ thống.</p>
+</div>
+<div class="flex justify-between pt-md">
+<button class="text-on-surface-variant px-xl py-md rounded-full font-label-md text-label-md hover:bg-black/5 transition-all flex items-center gap-sm" onclick="goToStep(2)" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Chỉnh sửa
+                        </button>
+<button class="bg-primary text-on-primary px-xl py-md rounded-full font-label-md text-label-md hover:scale-105 active:scale-95 transition-all shadow-lg" onclick="showSuccess()" type="button">
+                            Đăng tin ngay
+                        </button>
+</div>
+</div>
+</form>
+</div>
+</main>
+<!-- Success Modal -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-md opacity-0 pointer-events-none transition-all duration-500 bg-on-surface/20 backdrop-blur-md" id="success-modal">
+<div class="glass-card max-w-md w-full p-xl text-center shadow-2xl scale-90 transition-all duration-500">
+<div class="w-24 h-24 rounded-full bg-primary-container text-primary flex items-center justify-center mx-auto mb-lg animate-bounce">
+<span class="material-symbols-outlined text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-md">Đăng tin thành công!</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Tin đăng của bạn đã được gửi đi và đang đợi kiểm duyệt. Chúng tôi sẽ thông báo cho bạn ngay khi tin được duyệt.</p>
+<div class="flex flex-col gap-md">
+<button class="bg-primary text-on-primary w-full py-md rounded-full font-label-md text-label-md hover:scale-105 transition-transform" onclick="window.location.reload()">Về trang chủ</button>
+<button class="text-primary font-label-md text-label-md hover:underline" onclick="window.location.reload()">Quản lý tin đăng của tôi</button>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="w-full py-xl mt-xl bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-margin max-w-7xl mx-auto gap-lg">
+<div class="font-headline-md text-headline-md font-bold text-primary">LF</div>
+<div class="flex flex-wrap justify-center gap-lg">
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-sm text-label-sm" href="#">About</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Contact</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant dark:text-secondary-fixed-dim hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Terms</a>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant dark:text-secondary-fixed-dim opacity-80">
+                © 2024 LF University. All rights reserved.
+            </div>
+</div>
+</footer>
+<script>
+        let currentStep = 1;
+
+        function goToStep(step) {
+            // Update UI transition
+            const currentEl = document.getElementById(`form-step-${currentStep}`);
+            const nextEl = document.getElementById(`form-step-${step}`);
+            
+            currentEl.classList.remove('step-active');
+            currentEl.classList.add('step-inactive');
+            
+            setTimeout(() => {
+                nextEl.classList.remove('step-inactive');
+                nextEl.classList.add('step-active');
+            }, 50);
+
+            // Update Stepper
+            const dots = document.querySelectorAll('.step-dot');
+            const line = document.getElementById('step-line');
+            
+            line.style.width = `${(step - 1) * 50}%`;
+
+            dots.forEach((dot, index) => {
+                const dotInner = dot.querySelector('div');
+                const dotLabel = dot.querySelector('span:last-child');
+                const stepNum = index + 1;
+
+                if (stepNum < step) {
+                    dotInner.classList.remove('glass-card', 'text-on-surface-variant');
+                    dotInner.classList.add('bg-primary', 'text-on-primary');
+                    dotInner.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span>';
+                    dotLabel.classList.add('text-primary');
+                } else if (stepNum === step) {
+                    dotInner.classList.remove('glass-card', 'text-on-surface-variant', 'bg-primary-container');
+                    dotInner.classList.add('bg-primary', 'text-on-primary');
+                    const icon = step === 1 ? 'info' : step === 2 ? 'image' : 'check_circle';
+                    dotInner.innerHTML = `<span class="material-symbols-outlined text-[20px]">${icon}</span>`;
+                    dotLabel.classList.add('text-primary');
+                    dotLabel.classList.remove('text-on-surface-variant');
+                } else {
+                    dotInner.classList.add('glass-card', 'text-on-surface-variant');
+                    dotInner.classList.remove('bg-primary', 'text-on-primary');
+                    const icon = stepNum === 2 ? 'image' : 'check_circle';
+                    dotInner.innerHTML = `<span class="material-symbols-outlined text-[20px]">${icon}</span>`;
+                    dotLabel.classList.remove('text-primary');
+                    dotLabel.classList.add('text-on-surface-variant');
+                }
+            });
+
+            currentStep = step;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSuccess() {
+            const modal = document.getElementById('success-modal');
+            const modalContent = modal.querySelector('.glass-card');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-90');
+                modalContent.classList.add('scale-100');
+            }, 50);
+        }
+
+        // Initialize drag and drop visual effects
+        const dropZone = document.querySelector('.border-dashed');
+        if(dropZone) {
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.add('bg-primary-container/20', 'border-primary');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('bg-primary-container/20', 'border-primary');
+                }, false);
+            });
+        }
+    </script>
+</body></html>

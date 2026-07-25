@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chi tiết món đồ - UniFind</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#ffd8e9",
+                    "inverse-surface": "#2b3234",
+                    "on-secondary": "#ffffff",
+                    "primary": "#804f69",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d4dbdd",
+                    "surface": "#f4fafd",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#f2b5d3",
+                    "on-primary-fixed-variant": "#653851",
+                    "secondary": "#5d5f5f",
+                    "on-background": "#161d1f",
+                    "inverse-primary": "#f2b5d3",
+                    "tertiary-container": "#dec7cf",
+                    "background": "#f4fafd",
+                    "on-primary-container": "#774861",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d3c2c8",
+                    "surface-container-low": "#eef5f7",
+                    "surface-container-highest": "#dde4e6",
+                    "surface-bright": "#f4fafd",
+                    "inverse-on-surface": "#ebf2f4",
+                    "tertiary-fixed-dim": "#d7c1c8",
+                    "secondary-fixed": "#e2e2e2",
+                    "primary-container": "#f8bbd9",
+                    "outline": "#817379",
+                    "tertiary-fixed": "#f4dce4",
+                    "surface-container-high": "#e2e9ec",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#25181e",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#161d1f",
+                    "surface-variant": "#dde4e6",
+                    "surface-tint": "#804f69",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary-container": "#dfe0e0",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "tertiary": "#6b5a60",
+                    "on-surface-variant": "#4f4449",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-fixed-variant": "#524249",
+                    "on-tertiary-container": "#635259",
+                    "on-primary-fixed": "#330d24",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e8eff1",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#616363"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "container-margin": "20px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            box-shadow: 0 10px 30px rgba(0,0,0, 0.05);
+        }
+        .mesh-bg {
+            background: radial-gradient(at 0% 0%, #ffffff 0%, transparent 50%),
+                        radial-gradient(at 100% 0%, #f8bbd9 0%, transparent 50%),
+                        radial-gradient(at 0% 100%, #f8bbd9 0%, transparent 50%),
+                        radial-gradient(at 100% 100%, #ffffff 0%, transparent 50%);
+            background-color: #f4fafd;
+        }
+        .btn-squish:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="mesh-bg min-h-screen text-on-surface font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-white/60 backdrop-blur-xl fixed top-0 w-full z-50 shadow-sm border-b border-white/30">
+<div class="flex justify-between items-center h-20 px-container-margin max-w-7xl mx-auto">
+<div class="font-display-lg text-display-lg font-bold text-primary">LF</div>
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Lost Items</a>
+<a class="text-primary border-b-2 border-primary font-bold pb-1 font-label-md text-label-md" href="#">Found Items</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Guide</a>
+</nav>
+<div class="flex gap-md items-center">
+<span class="text-on-surface-variant font-label-md cursor-pointer hover:text-primary">Login</span>
+<button class="bg-primary text-white px-lg py-sm rounded-full font-label-md hover:scale-105 transition-transform duration-300 active:scale-95 shadow-sm">Post Listing</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-container-margin max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Left: Image Gallery & Carousel -->
+<div class="lg:col-span-7 space-y-lg">
+<div class="relative group">
+<div class="aspect-[4/3] rounded-[24px] overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover" data-alt="A high-quality studio photograph of a sleek modern Apple MacBook Air laptop resting on a minimalist white desk. The lighting is soft and airy, matching a clean glassmorphism aesthetic with hints of soft pink in the background shadows. The laptop is the central focus, appearing clean and well-maintained." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0IzJgexP_-37AzCaZccUPWF0Z5YvLQ4MwqVek_23uRy-0jBGKVP7n4yo_VW3Sr-51g_mXM_M9Nlqb8focCwI9COc0vqZfrcSY7yPs1FzhKLHwcg1RuIS9l9OutawPS07kEaSrBUbLL8AVhODTbkQW4_g6ceAiUvOVuOlmJg6Pa-h1yfxvva4VPS0n4MUe_VkAR8B8d1aLOTlHuCTvDE_wVqnDhSY9dZjC_L4pwtFZXTPokbCxdn3oZtGixkSML3ObBGCGDualNy4"/>
+<div class="absolute top-lg left-lg flex gap-sm">
+<span class="bg-green-100 text-green-700 px-md py-xs rounded-full font-label-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Found
+                            </span>
+<span class="bg-primary-container text-on-primary-container px-md py-xs rounded-full font-label-md">Electronics</span>
+</div>
+</div>
+</div>
+<!-- Thumbnails -->
+<div class="grid grid-cols-4 gap-md">
+<div class="aspect-square rounded-xl overflow-hidden glass-card border-primary">
+<img class="w-full h-full object-cover" data-alt="Close up detail of a silver laptop lid with a reflective logo. The background is a soft-focus minimalist university study hall with pastel pink and white color tones. Soft daylight illuminates the metallic texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpNcKz_PO-8pW00pMcegpWj3sW87UONPsFbWW21m2AeE3UkZBrERT67FubcTYhGFGIgOYcx3N55Nc8mc2WPy_gm6yr_9dkLGY-T48_wkc6ouCky2emy49HhySZoqCp5WnQiSCZC5rR4h8XzJsZ-h8vfE06rYdyjKq4lzdnmz_TUQz-LyW8FcVQcn16lB8YSxskB8FXmiNApMJg8GCTkLZyhITfIpSgINfUNS6yD1VZbocFZUAEDj6obX4sGXDvLE6AXPTgu8kJZ60"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden glass-card opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A university student identity card resting on top of a closed laptop. The card has clear typography and a blurred profile picture. The setting is a clean, bright library with large windows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByRvsi0sSl60Kb2nNgfU0Ulf3fVrvuHNDuRn--GbS2IXG-aNiAO0rnRECWaUmkBGH0OcUC4f-7YPrtU0y26I0KtC9Wa4dUvys_2t0KuvnhQdg07d0QvQkB1xQ_0AAIdAyR01ekupvHXSJ62S0vuoBtgfzB8YHFcGQkwp3OVuVGp4BR24LPbhCyoRfYrv0MYlDTTL4dyLpdhoinwwPsliOtJn6QKwY-ibEZctbJ8Q3ISAkI9yRnWJ93UxMf3PCWOH6QQRrjp56bows"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden glass-card opacity-60 hover:opacity-100 transition-opacity cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A wide shot of a university cafeteria table where the laptop was found. The environment is clean, bright, and modern with glass partitions and soft pink furniture accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPW7kH5r-1NI3CcsAMIDaetzhpr2u29QnN1vkR5etpcWo0RXvZeLtC5xP_d__j1aiqGuVWH_2DVn9Dt540p95dg9hJh8UzWWM1Iam6cN1spWdaneofnHWI_Q_d605kchb2TzeUe7ecU2v_RVcB8S7LXvX8RtbBuSpk6SGiDBFch-8bGww0XrYLT_YEenWM8MuQuAk0xD1xIZ3xOG0yRD1txuWklZMMhNHAYwjA4AuUfyLrV48UMVH97ueNiFIi4PvMsT4FR-ZpohI"/>
+</div>
+<div class="aspect-square rounded-xl overflow-hidden glass-card relative">
+<img class="w-full h-full object-cover blur-[2px]" data-alt="A blurred background of a student lounge with a digital overlay indicating more photos are available. Soft bokeh lighting in pink and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDozNQDGdxEnndNIO58kYisDjppjpE8gGK4rnIbwADFMatHr9uHc1h4j_SOiP-kNTDEnZpVS0kBSwSh1SpfkKTjRIfL048LT_fRk7AV4dzhQMyDSfUxbwmI0-nKgzkdvBUqEAkT0VOjp57F3UmD8lBCIlv-lhpU7-PNWjc12ujm89s4zxleQi4zCIfV8RM5jHnslbKQWGdhf_vhpVfpekF4UjANCnqSebH0dg4xztLjnsH37YQc4aiMMIQVlQYVGr6M8UbQUmTZ5Qg"/>
+<div class="absolute inset-0 flex items-center justify-center font-bold text-primary">+2</div>
+</div>
+</div>
+</div>
+<!-- Right: Item Details & Actions -->
+<div class="lg:col-span-5 flex flex-col gap-lg">
+<div class="glass-card rounded-[24px] p-lg">
+<div class="flex justify-between items-start mb-md">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">MacBook Air M2 - Silver</h1>
+<button class="p-sm rounded-full hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary">share</span>
+</button>
+</div>
+<div class="flex items-center gap-md text-on-surface-variant mb-lg">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">location_on</span>
+<span class="font-label-md">Thư viện Tòa A</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+<span class="font-label-md">15/10/2023 - 14:30</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mb-xl leading-relaxed">
+                        Mình có nhặt được một chiếc MacBook Air M2 màu Silver tại khu vực bàn tự học tầng 2 Thư viện Tòa A. Máy có dán sticker ở mặt trước và đang để trong túi chống sốc màu xám.
+                    </p>
+<!-- User Info Card -->
+<div class="flex items-center gap-md p-md bg-surface-container-low rounded-xl mb-xl">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="Portrait of a friendly Vietnamese university student, young woman with a kind smile, wearing a modern casual outfit. She is in a bright university courtyard with soft afternoon lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-nsn2bNIcHs6kDvvU3CjFYKGgPytv9P4b5XmBPPYcf9QYpPfYw9IR0wZKNhQxLC1TwoPAdInsmaestOyJ98jMc2dgX2l_qi0KQnSjB7v_MtML_jJB4Zk1gE6YhwnhhyPCi2h7vixTcWZTbkB8XUqE9YTelQz5HgoSIcr5i8LC22TjC4kO2DwLYrtUcnIUx5ZxF6XmaKitzSL8K4xxrk5xbL5GSe7hhrzDvM_z_MGv5KIdHWk7GQLszidVf_GsA20xMCGS0H8Apoc"/>
+</div>
+<div class="flex-1">
+<h4 class="font-label-md text-on-surface">Lê Minh Anh</h4>
+<p class="text-label-sm text-on-surface-variant">Người tìm thấy • Sinh viên K18</p>
+</div>
+<span class="bg-green-50 text-green-600 px-sm py-xs rounded-full font-label-sm">Verified</span>
+</div>
+<!-- Privacy Dependent Actions -->
+<div id="action-section">
+<!-- Hidden Privacy State (Default for demo) -->
+<div class="flex flex-col gap-md" id="privacy-hidden">
+<div class="p-md bg-primary-container/20 rounded-xl border border-primary-container/30">
+<div class="flex gap-md">
+<span class="material-symbols-outlined text-primary">visibility_off</span>
+<div>
+<h5 class="font-label-md text-primary">Thông tin liên hệ được ẩn</h5>
+<p class="text-label-sm text-on-surface-variant">Người đăng muốn bảo mật thông tin. Vui lòng gửi yêu cầu để kết nối.</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white h-14 rounded-full font-label-md flex items-center justify-center gap-md btn-squish hover:opacity-90 transition-opacity shadow-lg" onclick="toggleModal(true)">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">handshake</span>
+                                Yêu cầu nhận lại
+                            </button>
+</div>
+<!-- Public Privacy State (Hidden by default) -->
+<div class="hidden flex flex-col gap-md" id="privacy-public">
+<h5 class="font-label-md text-on-surface">Thông tin liên hệ người tìm thấy</h5>
+<div class="grid grid-cols-2 gap-md">
+<a class="flex items-center gap-md p-md glass-card rounded-xl hover:bg-primary-container/10" href="tel:0901234567">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="font-label-md">Gọi điện</span>
+</a>
+<a class="flex items-center gap-md p-md glass-card rounded-xl hover:bg-primary-container/10" href="#">
+<span class="material-symbols-outlined text-primary">chat</span>
+<span class="font-label-md">Zalo</span>
+</a>
+</div>
+<button class="w-full border-2 border-primary text-primary h-14 rounded-full font-label-md flex items-center justify-center gap-md btn-squish hover:bg-primary/5">
+                                Gửi lời cảm ơn
+                            </button>
+</div>
+</div>
+</div>
+<!-- Resolved Badge Example -->
+<div class="glass-card rounded-[24px] p-lg border-2 border-outline-variant/20 flex items-center gap-lg opacity-80">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">task_alt</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface flex items-center gap-sm">
+                            Đã giải quyết 
+                            <span class="bg-secondary-container text-on-secondary-container px-sm py-0.5 rounded-full text-[10px] uppercase font-bold">Closed</span>
+</h4>
+<p class="text-label-sm text-on-surface-variant">Món đồ này đã tìm thấy chủ nhân vào ngày 16/10/2023.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal Form (Privacy: Hidden) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-container-margin hidden" id="claim-modal">
+<div class="absolute inset-0 bg-on-surface/20 backdrop-blur-sm" onclick="toggleModal(false)"></div>
+<div class="glass-modal w-full max-w-lg rounded-[32px] p-xl relative animate-in fade-in zoom-in duration-300">
+<button class="absolute top-lg right-lg p-sm hover:bg-surface-container rounded-full" onclick="toggleModal(false)">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Xác nhận quyền sở hữu</h2>
+<p class="text-on-surface-variant font-body-md">Vui lòng để lại thông tin liên lạc. Người tìm thấy sẽ chủ động liên hệ với bạn sau khi xác nhận.</p>
+</div>
+<form class="space-y-lg" onsubmit="event.preventDefault(); alert('Yêu cầu đã được gửi!'); toggleModal(false);">
+<div class="space-y-sm">
+<label class="font-label-md text-on-surface-variant px-xs">Thông tin liên hệ (SĐT / Zalo / Facebook)</label>
+<input class="w-full h-14 bg-white/40 border border-white/30 rounded-xl px-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none" placeholder="Nhập link profile hoặc số điện thoại..." type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-on-surface-variant px-xs">Lời nhắn cho người tìm thấy</label>
+<textarea class="w-full bg-white/40 border border-white/30 rounded-xl p-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none resize-none" placeholder="Mô tả thêm đặc điểm nhận dạng hoặc lời nhắn..." rows="4"></textarea>
+</div>
+<div class="pt-md">
+<button class="w-full bg-primary text-white h-14 rounded-full font-label-md btn-squish shadow-lg hover:brightness-110" type="submit">
+                        Gửi yêu cầu nhận lại
+                    </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full py-xl mt-xl border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-margin max-w-7xl mx-auto gap-lg">
+<div class="font-headline-md text-headline-md font-bold text-primary">LF</div>
+<div class="flex gap-xl">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">About</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Contact</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Terms</a>
+</div>
+<p class="text-on-surface-variant font-label-sm text-label-sm opacity-80">© 2024 LF University. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        function toggleModal(show) {
+            const modal = document.getElementById('claim-modal');
+            if (show) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Simulating privacy toggle for demo purposes
+        function switchPrivacy(type) {
+            const hiddenSection = document.getElementById('privacy-hidden');
+            const publicSection = document.getElementById('privacy-public');
+            if (type === 'public') {
+                hiddenSection.classList.add('hidden');
+                publicSection.classList.remove('hidden');
+            } else {
+                hiddenSection.classList.remove('hidden');
+                publicSection.classList.add('hidden');
+            }
+        }
+
+        // Animation on scroll/load
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.glass-card');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body></html>

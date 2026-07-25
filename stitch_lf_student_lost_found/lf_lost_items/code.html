@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LF - Tìm đồ thất lạc</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface": "#161d1f",
+                    "on-primary-fixed-variant": "#653851",
+                    "tertiary-container": "#dec7cf",
+                    "secondary-fixed": "#e2e2e2",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#d7c1c8",
+                    "secondary": "#5d5f5f",
+                    "surface-dim": "#d4dbdd",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-primary-fixed": "#330d24",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#4f4449",
+                    "inverse-surface": "#2b3234",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "on-primary-container": "#774861",
+                    "on-secondary-container": "#616363",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#25181e",
+                    "inverse-on-surface": "#ebf2f4",
+                    "on-tertiary-fixed-variant": "#524249",
+                    "surface-container-highest": "#dde4e6",
+                    "primary-fixed-dim": "#f2b5d3",
+                    "primary": "#804f69",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#f4dce4",
+                    "surface-container": "#e8eff1",
+                    "outline": "#817379",
+                    "surface-container-low": "#eef5f7",
+                    "on-error": "#ffffff",
+                    "primary-container": "#f8bbd9",
+                    "on-secondary-fixed-variant": "#454747",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#dfe0e0",
+                    "inverse-primary": "#f2b5d3",
+                    "outline-variant": "#d3c2c8",
+                    "surface-variant": "#dde4e6",
+                    "tertiary": "#6b5a60",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#635259",
+                    "surface-container-high": "#e2e9ec",
+                    "on-background": "#161d1f",
+                    "background": "#f4fafd",
+                    "primary-fixed": "#ffd8e9",
+                    "surface-bright": "#f4fafd",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#804f69",
+                    "surface": "#f4fafd"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "base": "8px",
+                    "lg": "24px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f4fafd;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #804f69;
+            outline: none;
+        }
+
+        .primary-btn {
+            background-color: #f8bbd9;
+            color: #330d24;
+            transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+
+        .primary-btn:active {
+            transform: scale(0.98);
+        }
+
+        .chip-found {
+            background: rgba(76, 175, 80, 0.1);
+            color: #2e7d32;
+        }
+
+        .chip-lost {
+            background: rgba(244, 67, 54, 0.1);
+            color: #d32f2f;
+        }
+
+        .fade-up {
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, #fce4ec 0px, transparent 50%),
+                radial-gradient(at 100% 0%, #e1f5fe 0px, transparent 50%),
+                radial-gradient(at 100% 100%, #f3e5f5 0px, transparent 50%),
+                radial-gradient(at 0% 100%, #e8f5e9 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<div class="mesh-bg"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/60 dark:bg-on-surface/60 backdrop-blur-xl border-b border-white/30 shadow-sm">
+<div class="flex justify-between items-center h-20 px-container-margin max-w-7xl mx-auto">
+<div class="font-display-lg text-display-lg font-bold text-primary">LF</div>
+<nav class="hidden md:flex gap-xl">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Home</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary font-bold pb-1" href="#">Lost Items</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Found Items</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Guide</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors">Login</button>
+<button class="primary-btn px-lg py-sm rounded-full font-label-md text-label-md shadow-sm">Post Listing</button>
+</div>
+</div>
+</header>
+<main class="pt-32 pb-xl px-container-margin max-w-7xl mx-auto min-h-screen">
+<!-- Page Header -->
+<div class="mb-xl">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-xs">Tìm đồ thất lạc</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Duyệt qua danh sách các đồ vật đã bị thất lạc trong khuôn viên trường.</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-lg">
+<!-- Sidebar Filters -->
+<aside class="w-full lg:w-64 flex-shrink-0">
+<div class="glass-card p-lg sticky top-28">
+<h2 class="font-label-md text-label-md text-primary mb-md flex items-center gap-xs">
+<span class="material-symbols-outlined" style="font-size: 20px;">filter_list</span>
+                        Bộ lọc nâng cao
+                    </h2>
+<div class="space-y-lg">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Danh mục</label>
+<select class="w-full glass-input rounded-xl px-md py-sm font-body-md text-body-md">
+<option>Tất cả</option>
+<option>Thiết bị điện tử</option>
+<option>Giấy tờ &amp; Thẻ</option>
+<option>Đồ dùng cá nhân</option>
+<option>Khác</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Vị trí</label>
+<select class="w-full glass-input rounded-xl px-md py-sm font-body-md text-body-md">
+<option>Toàn trường</option>
+<option>Giảng đường A</option>
+<option>Khu thư viện</option>
+<option>Nhà thi đấu</option>
+<option>Khu vực Căn tin</option>
+</select>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Khoảng thời gian</label>
+<div class="space-y-xs">
+<input class="w-full glass-input rounded-xl px-md py-sm font-body-md text-body-md" type="date"/>
+<input class="w-full glass-input rounded-xl px-md py-sm font-body-md text-body-md" type="date"/>
+</div>
+</div>
+<button class="w-full primary-btn py-sm rounded-xl font-label-md text-label-md mt-md">Áp dụng</button>
+<button class="w-full text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors">Xóa tất cả</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-grow">
+<!-- Search and Stats -->
+<div class="flex flex-col md:flex-row justify-between items-center mb-lg gap-md">
+<div class="relative w-full md:max-w-md">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full glass-input rounded-full pl-xl pr-md py-sm font-body-md" placeholder="Tìm kiếm theo tên vật dụng..." type="text"/>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">
+                        Đang hiển thị <span class="font-bold text-primary">12</span> kết quả
+                    </div>
+</div>
+<!-- Main Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-lg" id="results-grid">
+<!-- Item Card 1 -->
+<div class="glass-card overflow-hidden fade-up" style="animation-delay: 0.1s;">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A clean, high-resolution close-up photo of a sleek silver laptop on a minimalist white desk. The lighting is soft and natural, emphasizing the metallic texture and modern design. The background is slightly blurred, creating a premium professional feel with a light-mode aesthetic dominated by soft whites and subtle pink accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnlpzwenue078k0YdtA-Mk5ES8-YwB6LVYFDcAiSwNkDkIvambudDtYedej1qNI6zRxzTUrowR5icAunLqA-jw-fib0Ur7KLQzH-8U4Dw6ZqYsBNBMikYksBtQOigwu68T_FmCLFPY_LhI7ASokN1DF1g3Ib-OXBiYKv9QLYGkvBWx-O5KmEr_m003P_CxhuyiMuSVfdRHfR1t-aZIMPIqJ1cVMYYddlXwCDyAYKEqSBos3dYxuBi2V0UNBuGPirvTbVB-W2O44KI"/>
+<div class="absolute top-md left-md">
+<span class="chip-lost px-md py-xs rounded-full font-label-sm text-label-sm backdrop-blur-md">Mất</span>
+</div>
+</div>
+<div class="p-lg">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-headline-md text-headline-md text-on-surface">MacBook Air M2</h3>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:fill-1" data-icon="favorite">favorite</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Màu xám không gian, có dán sticker hình phi hành gia ở mặt lưng. Mất tại khu vực Thư viện Tầng 3.</p>
+<div class="flex flex-col gap-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Thư viện trung tâm</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>2 giờ trước</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item Card 2 -->
+<div class="glass-card overflow-hidden fade-up" style="animation-delay: 0.2s;">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A detailed photo of a bunch of metallic keys with a colorful handmade keychain of a small stuffed bear. The keys are resting on a wooden surface with soft bokeh lighting in the background. The overall aesthetic is warm and inviting, using a palette of soft pastels and natural light to create a feeling of trust and recovery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7hER61PTUZ3THXFoVq2RyTpZyqVnSQNhOnnER66wBKfNjToWXOj0k-_Yy28qbWBmQXR5KhIQ3NXLBHWOEPWbT0omaLEAdeZqgbWSSsOPliJ7vJeUTXZ-lWyYNaWInvMMKYkn5GAUWp_oqodMgkljBrRmbLHZpN71_6jR_s4dmd1P2C836djadHlShtwJ7G3URO9bgId7JurhqUsAC1kZlXj1xyR5kXCvnmBa78x2vPVda9pqMDQ5aelInk3MwAbWKWl4tfu_1FPc"/>
+<div class="absolute top-md left-md">
+<span class="chip-lost px-md py-xs rounded-full font-label-sm text-label-sm backdrop-blur-md">Mất</span>
+</div>
+</div>
+<div class="p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Chùm chìa khóa</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Có 3 chìa và 1 móc khóa gấu bông màu nâu. Rơi tại bãi giữ xe khu B.</p>
+<div class="flex flex-col gap-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Bãi xe khu B</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>Hôm qua</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item Card 3 -->
+<div class="glass-card overflow-hidden fade-up" style="animation-delay: 0.3s;">
+<div class="h-48 relative">
+<img class="w-full h-full object-cover" data-alt="A focused studio shot of a high-end leather wallet, dark brown color, showing fine stitching details. The wallet is positioned on a clean glass surface with subtle reflections. The lighting is sophisticated, using a soft-box effect to create gentle highlights. The style is minimalist and high-end, aligning with a premium glassmorphism design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9afidAh9IPlqDEQ7-92UgkUsa3iIcDqDY6FjfnFYls479Az4MErZjHiqDkGik5014WW6KUdvT632kxa3T_I4flOL7ERfflptoaQpvmIoC8bSSnSj5JLbusVaS86oV9hnkRPWCH5IGZf1FIlvkFRjodlOJ_d4g75TMOdFeQaSPhE_SHqXcRhPNU_9Gpkt2y_-DVc34l4hGxb7Rqy4o2t-GsTqg_KqX3luJy8MNIiPwfZmPEyyncWNG5UtPMRxbc-KZFEaLa5EFvBI"/>
+<div class="absolute top-md left-md">
+<span class="chip-lost px-md py-xs rounded-full font-label-sm text-label-sm backdrop-blur-md">Mất</span>
+</div>
+</div>
+<div class="p-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Ví tiền Sen</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-md">Ví da màu nâu, bên trong có thẻ sinh viên tên Nguyễn Văn A và một ít tiền mặt.</p>
+<div class="flex flex-col gap-xs font-label-sm text-label-sm text-on-surface-variant">
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">location_on</span>
+<span>Giảng đường A2</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span>3 ngày trước</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Placeholder (Hidden by default, shown for demo purpose or if results=0) -->
+<div class="hidden col-span-full flex-col items-center justify-center py-xl text-center" id="empty-state">
+
+<h3 class="font-headline-md text-headline-md text-primary mb-xs">Không tìm thấy kết quả</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto">
+                            Chúng tôi không tìm thấy món đồ nào khớp với bộ lọc của bạn. Hãy thử thay đổi từ khóa hoặc mở rộng phạm vi tìm kiếm.
+                        </p>
+<button class="mt-lg text-primary font-label-md underline" onclick="resetFilters()">Xóa tất cả bộ lọc</button>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-xl flex justify-center gap-sm">
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary-container">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full primary-btn font-label-md">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary-container font-label-md">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary-container font-label-md">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full glass-card hover:bg-primary-container">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl mt-xl bg-surface-container-low border-t border-outline-variant/20">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-margin max-w-7xl mx-auto gap-lg">
+<div class="flex flex-col gap-sm">
+<div class="font-headline-md text-headline-md font-bold text-primary">LF</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xs">Hỗ trợ tìm kiếm và trao trả đồ vật thất lạc cho cộng đồng sinh viên.</p>
+</div>
+<div class="flex gap-xl">
+<div class="flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-primary">Khám phá</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Về chúng tôi</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Liên hệ</a>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="font-label-md text-label-md text-primary">Pháp lý</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Chính sách bảo mật</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Điều khoản dịch vụ</a>
+</div>
+</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant text-center md:text-right">
+                © 2024 LF University. All rights reserved.
+            </div>
+</div>
+</footer>
+<!-- Floating Quick Action (Mobile only FAB replacement or Desktop companion) -->
+<button class="fixed bottom-lg right-lg primary-btn w-14 h-14 md:w-auto md:px-lg md:rounded-full rounded-full flex items-center justify-center gap-sm shadow-xl z-40 lg:hidden">
+<span class="material-symbols-outlined">add</span>
+<span class="hidden md:inline font-label-md">Đăng tin</span>
+</button>
+<script>
+        // Simple search interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const grid = document.getElementById('results-grid');
+            const empty = document.getElementById('empty-state');
+            const cards = grid.querySelectorAll('.glass-card:not(#empty-state)');
+            
+            if (e.target.value.toLowerCase() === 'rỗng') {
+                cards.forEach(c => c.style.display = 'none');
+                empty.classList.remove('hidden');
+                empty.classList.add('flex');
+            } else {
+                cards.forEach(c => c.style.display = 'block');
+                empty.classList.add('hidden');
+                empty.classList.remove('flex');
+            }
+        });
+
+        function resetFilters() {
+            searchInput.value = '';
+            const grid = document.getElementById('results-grid');
+            const empty = document.getElementById('empty-state');
+            const cards = grid.querySelectorAll('.glass-card:not(#empty-state)');
+            cards.forEach(c => c.style.display = 'block');
+            empty.classList.add('hidden');
+            empty.classList.remove('flex');
+        }
+
+        // Add tactile squish effect to cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1.02) translateY(-4px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

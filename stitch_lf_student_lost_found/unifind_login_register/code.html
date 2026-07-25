@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UniFind - Login &amp; Register</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed": "#ffd8e9",
+                    "inverse-surface": "#2b3234",
+                    "on-secondary": "#ffffff",
+                    "primary": "#804f69",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d4dbdd",
+                    "surface": "#f4fafd",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#f2b5d3",
+                    "on-primary-fixed-variant": "#653851",
+                    "secondary": "#5d5f5f",
+                    "on-background": "#161d1f",
+                    "inverse-primary": "#f2b5d3",
+                    "tertiary-container": "#dec7cf",
+                    "background": "#f4fafd",
+                    "on-primary-container": "#774861",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#d3c2c8",
+                    "surface-container-low": "#eef5f7",
+                    "surface-container-highest": "#dde4e6",
+                    "surface-bright": "#f4fafd",
+                    "inverse-on-surface": "#ebf2f4",
+                    "tertiary-fixed-dim": "#d7c1c8",
+                    "secondary-fixed": "#e2e2e2",
+                    "primary-container": "#f8bbd9",
+                    "outline": "#817379",
+                    "tertiary-fixed": "#f4dce4",
+                    "surface-container-high": "#e2e9ec",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#25181e",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#161d1f",
+                    "surface-variant": "#dde4e6",
+                    "surface-tint": "#804f69",
+                    "on-secondary-fixed-variant": "#454747",
+                    "secondary-container": "#dfe0e0",
+                    "on-secondary-fixed": "#1a1c1c",
+                    "tertiary": "#6b5a60",
+                    "on-surface-variant": "#4f4449",
+                    "secondary-fixed-dim": "#c6c6c7",
+                    "on-tertiary-fixed-variant": "#524249",
+                    "on-tertiary-container": "#635259",
+                    "on-primary-fixed": "#330d24",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#e8eff1",
+                    "error": "#ba1a1a",
+                    "on-secondary-container": "#616363"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "container-margin": "20px",
+                    "gutter": "16px",
+                    "base": "8px",
+                    "sm": "8px",
+                    "xl": "32px",
+                    "xs": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transform: translateY(-4px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .auth-transition {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .bg-mesh {
+            background: radial-gradient(at 0% 0%, #ffd8e9 0%, transparent 50%),
+                        radial-gradient(at 100% 0%, #f4fafd 0%, transparent 50%),
+                        radial-gradient(at 100% 100%, #ffd8e9 0%, transparent 50%),
+                        radial-gradient(at 0% 100%, #f4fafd 0%, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Background Layer -->
+<div class="fixed inset-0 z-[-1] bg-mesh opacity-60"></div>
+<div class="fixed inset-0 z-[-2] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, soft-focus view of a prestigious university campus library at sunset. Golden hour light streams through high windows, illuminating dust motes and rows of classic books. The atmosphere is quiet, intellectual, and serene, using a sophisticated pastel pink and clean white color palette to match the glassmorphism UI. The scene is slightly blurred to serve as a background for an authentication screen." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCB6vzmoA-vg0j8zou5vAR0Ajbhr_JLc3gsA5Lfmo611E_zfAGo_PWG2Q3wsQldrjsodUlhq6dlPkLFiAsOJfqlo7gMUnFAk3HEF2YZLTqm6VXxnfWGHYgCDy7WFU14EXAHcZZAP0aY_y18yoRLGc7bhn7yIVaZFmj-YSNNp4OEt-l3zzjhay4VM80svjeoyuKXKc8byYtKHh_aR1bqJzCaXI-GVITETpdP50b580EtUh_E7eRKUMrALzTNYwHjdGeRRk0KxqtA27w')"></div>
+</div>
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center px-container-margin py-xl relative">
+<div class="w-full max-w-5xl flex flex-col md:flex-row gap-lg items-center">
+<!-- Brand Column -->
+<div class="w-full md:w-1/2 flex flex-col items-center md:items-start text-center md:text-left space-y-md animate-fade-in">
+<div class="font-display-lg text-display-lg font-bold text-primary mb-sm">
+                    LF
+                </div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">
+                    Recover what matters.
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                    Join the UniFind community to help fellow students find their lost belongings across campus.
+                </p>
+<div class="hidden md:block pt-xl">
+<div class="flex -space-x-sm">
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a diverse university student smiling warmly, professional studio lighting, high-end lifestyle photography style, part of a social proof cluster for an app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7rKJjKf4kPiQ6SJposTQTGxClJzH0dTC4RBPI1bOx2CTc2Q2kjJD0VdshxfBQZFdIfJXbLxM7NuFvrOLPceUDEB00crz9NR5cfuUVhVEn9HMRlVOIg0Aa1JN_lc9Ga81sQebWjHVPTFD_Ct1Fuop3RWOj2ukPJtxLg7o591AaGIturqMssl5hgjxt8Eb2c61JM9-yf0hqztvCMgDrLJk2r-8uA5btf9hT9h5GXlgs5FyW2yOFr-HbyAD9VIu8LfEPROGKkn0ZVsI"/>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male student looking helpful and approachable, high-quality digital photography with a soft bokeh background of a campus setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBDutQDq33GeTOdGEnCC4WCGE5Mkryq3DAs0D4oikuLi9Vj_hhI7LkAGyIw5RZSIXYBszkcdOkq6IiMhqF-txCdqBWbgY9Gn2UC_BT0oZi_ZdVcJwQjt9tjNX8V-xSVo6qwDGo7NhMA5N-QuAT0-Mxa6KCOr1BL7gPYh0MTRbXlSN8QmJfRwRvRHeYjaBkJAOIiW-30xceqINmIynm0yiICEDtZvOTTeY2-Nev2QtXz_dbwtdOsF6dlBQHCAClHbRZYFjUArBwjWM"/>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-white overflow-hidden bg-primary-container flex items-center justify-center">
+<span class="font-label-sm text-on-primary-container text-[10px]">500+</span>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-sm mt-sm">Active students returning items today</p>
+</div>
+</div>
+<!-- Auth Form Column -->
+<div class="w-full md:w-1/2 max-w-md">
+<div class="glass-card rounded-[24px] p-lg shadow-sm relative overflow-hidden" id="auth-container">
+<!-- Login Form -->
+<div class="auth-transition space-y-md opacity-100 transform translate-x-0" id="login-form">
+<div class="text-center md:text-left mb-xl">
+<h2 class="font-headline-md text-headline-md text-primary">Welcome back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Log in to your student account</p>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">Student ID or Email</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-xl pr-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="e.g. 20241234" type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-xl pr-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" placeholder="••••••••" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between px-xs">
+<label class="flex items-center space-x-sm cursor-pointer">
+<input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/>
+<span class="font-label-sm text-on-surface-variant">Remember me</span>
+</label>
+<a class="font-label-sm text-primary hover:underline transition-all" href="#">Forgot?</a>
+</div>
+<button class="w-full py-md bg-primary text-white rounded-xl font-label-md shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center space-x-sm">
+<span>Log In</span>
+<span class="material-symbols-outlined text-[20px]">login</span>
+</button>
+<div class="pt-md text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                New to LF? 
+                                <button class="text-primary font-bold hover:underline transition-all ml-xs" onclick="toggleAuth('signup')">Sign Up</button>
+</p>
+</div>
+</div>
+<!-- Register Form (Hidden Initially) -->
+<div class="auth-transition space-y-md absolute inset-0 p-lg opacity-0 pointer-events-none transform translate-x-12" id="signup-form">
+<div class="text-center md:text-left mb-xl">
+<h2 class="font-headline-md text-headline-md text-primary">Join LF</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Create your UniFind account</p>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">First Name</label>
+<input class="w-full px-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:border-primary transition-all" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">Last Name</label>
+<input class="w-full px-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:border-primary transition-all" type="text"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">University Email</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">mail</span>
+<input class="w-full pl-xl pr-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:border-primary transition-all" placeholder="student@uni.edu" type="email"/>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant block px-xs">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">lock</span>
+<input class="w-full pl-xl pr-md py-md bg-white/40 border border-outline-variant/30 rounded-xl font-body-md focus:border-primary transition-all" placeholder="Create password" type="password"/>
+</div>
+</div>
+<button class="w-full py-md bg-primary text-white rounded-xl font-label-md shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center space-x-sm">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</button>
+<div class="pt-md text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Already registered? 
+                                <button class="text-primary font-bold hover:underline transition-all ml-xs" onclick="toggleAuth('login')">Log In</button>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-xl mt-xl border-t border-outline-variant/20 bg-surface-container-low/60 backdrop-blur-md">
+<div class="flex flex-col md:flex-row justify-between items-center px-container-margin max-w-7xl mx-auto gap-lg">
+<div class="font-headline-md text-headline-md font-bold text-primary">LF</div>
+<p class="text-on-surface-variant font-body-md font-label-sm">© 2024 LF University. All rights reserved.</p>
+<div class="flex space-x-md">
+<a class="text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">About</a>
+<a class="text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">Contact</a>
+<a class="text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-sm hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        function toggleAuth(mode) {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const authContainer = document.getElementById('auth-container');
+
+            if (mode === 'signup') {
+                loginForm.classList.remove('opacity-100', 'translate-x-0');
+                loginForm.classList.add('opacity-0', '-translate-x-12', 'pointer-events-none');
+                
+                signupForm.classList.remove('opacity-0', 'translate-x-12', 'pointer-events-none');
+                signupForm.classList.add('opacity-100', 'translate-x-0');
+                signupForm.classList.add('relative');
+                loginForm.classList.add('absolute', 'inset-0', 'p-lg');
+            } else {
+                signupForm.classList.remove('opacity-100', 'translate-x-0');
+                signupForm.classList.add('opacity-0', 'translate-x-12', 'pointer-events-none');
+                
+                loginForm.classList.remove('opacity-0', '-translate-x-12', 'pointer-events-none');
+                loginForm.classList.add('opacity-100', 'translate-x-0');
+                loginForm.classList.remove('absolute', 'inset-0', 'p-lg');
+                signupForm.classList.add('absolute', 'inset-0', 'p-lg');
+            }
+        }
+
+        // Atmospheric micro-interaction for glass cards
+        document.addEventListener('mousemove', (e) => {
+            const container = document.getElementById('auth-container');
+            const rect = container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            if (x > 0 && x < rect.width && y > 0 && y < rect.height) {
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 50;
+                const rotateY = (centerX - x) / 50;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            } else {
+                container.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            }
+        });
+    </script>
+</body></html>
