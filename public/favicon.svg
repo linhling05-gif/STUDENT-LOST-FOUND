@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Sharp background box -->
+  <rect x="2" y="2" width="60" height="60" fill="#881337" stroke="#0f172a" stroke-width="4" />
+  <!-- Graduation Cap Icon in White -->
+  <path fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter" d="M32 16 L54 27 L32 38 L10 27 Z" />
+  <path fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="square" stroke-linejoin="miter" d="M18 31.5 V42 C18 42, 24 46, 32 46 C40 46, 46 42, 46 42 V31.5" />
+  <path fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" d="M50 29 V44" />
+  <circle cx="50" cy="46" r="2.5" fill="#ffffff" />
+</svg>

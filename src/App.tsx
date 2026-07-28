@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Item, ClaimRequest, ToastMessage } from './types';
+import { Item, ClaimRequest, ToastMessage, Comment } from './types';
 import { INITIAL_ITEMS, INITIAL_CLAIMS } from './data/mockData';
 import { Header } from './components/Header';
 import { FilterBar } from './components/FilterBar';
 import { ItemCard } from './components/ItemCard';
+import { QuickPostBox } from './components/QuickPostBox';
+import { LeftSidebar } from './components/LeftSidebar';
+import { RightSidebar } from './components/RightSidebar';
 import { ItemDetailModal } from './components/ItemDetailModal';
 import { CreatePostModal } from './components/CreatePostModal';
 import { DashboardDrawer } from './components/DashboardDrawer';
@@ -11,24 +14,24 @@ import { ToastContainer } from './components/ToastContainer';
 import { GraduationCap, Inbox } from 'lucide-react';
 
 export function App() {
-  // Local storage persisted state - re-initialize with v3 without Nha V
+  // Local storage persisted state - v8
   const [items, setItems] = useState<Item[]>(() => {
-    const saved = localStorage.getItem('unifind_ftu_items_v3');
+    const saved = localStorage.getItem('unifind_ftu_items_v8');
     return saved ? JSON.parse(saved) : INITIAL_ITEMS;
   });
 
   const [claims, setClaims] = useState<ClaimRequest[]>(() => {
-    const saved = localStorage.getItem('unifind_ftu_claims_v3');
+    const saved = localStorage.getItem('unifind_ftu_claims_v8');
     return saved ? JSON.parse(saved) : INITIAL_CLAIMS;
   });
 
   // Save to local storage on change
   useEffect(() => {
-    localStorage.setItem('unifind_ftu_items_v3', JSON.stringify(items));
+    localStorage.setItem('unifind_ftu_items_v8', JSON.stringify(items));
   }, [items]);
 
   useEffect(() => {
-    localStorage.setItem('unifind_ftu_claims_v3', JSON.stringify(claims));
+    localStorage.setItem('unifind_ftu_claims_v8', JSON.stringify(claims));
   }, [claims]);
 
   // UI state
@@ -36,6 +39,8 @@ export function App() {
   const [activeTab, setActiveTab] = useState<'all' | 'lost' | 'found' | 'resolved'>('all');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   // Modals
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -71,6 +76,19 @@ export function App() {
       if (selectedCategory && item.category !== selectedCategory) return false;
       if (selectedLocation && item.location !== selectedLocation) return false;
 
+      // Date Range Filter logic
+      if (startDate) {
+        const itemTime = new Date(item.createdAt).getTime();
+        const startMs = new Date(`${startDate}T00:00:00`).getTime();
+        if (itemTime < startMs) return false;
+      }
+
+      if (endDate) {
+        const itemTime = new Date(item.createdAt).getTime();
+        const endMs = new Date(`${endDate}T23:59:59.999`).getTime();
+        if (itemTime > endMs) return false;
+      }
+
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase().trim();
         const matchTitle = item.title.toLowerCase().includes(q);
@@ -82,7 +100,43 @@ export function App() {
 
       return true;
     });
-  }, [items, activeTab, selectedCategory, selectedLocation, searchQuery]);
+  }, [items, activeTab, selectedCategory, selectedLocation, startDate, endDate, searchQuery]);
+
+  // Social Actions
+  const handleToggleLike = (itemId: string) => {
+    setItems((prev) =>
+      prev.map((item) => {
+        if (item.id === itemId) {
+          const userLiked = !item.userLiked;
+          const likesCount = (item.likesCount || 0) + (userLiked ? 1 : -1);
+          return { ...item, userLiked, likesCount };
+        }
+        return item;
+      })
+    );
+  };
+
+  const handleAddComment = (itemId: string, content: string) => {
+    const newComment: Comment = {
+      id: `c-${Date.now()}`,
+      itemId,
+      authorName: 'FTU Student',
+      authorClass: 'K61 FTU Hanoi',
+      authorAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80',
+      content,
+      createdAt: new Date().toISOString(),
+    };
+
+    setItems((prev) =>
+      prev.map((item) => {
+        if (item.id === itemId) {
+          const comments = [newComment, ...(item.comments || [])];
+          return { ...item, comments };
+        }
+        return item;
+      })
+    );
+  };
 
   const handleCreatePost = (newPostData: Omit<Item, 'id' | 'createdAt' | 'status'>) => {
     const newPost: Item = {
@@ -90,6 +144,9 @@ export function App() {
       id: `item-${Date.now()}`,
       status: 'active',
       createdAt: new Date().toISOString(),
+      likesCount: 0,
+      userLiked: false,
+      comments: [],
     };
     setItems((prev) => [newPost, ...prev]);
   };
@@ -126,7 +183,7 @@ export function App() {
   const pendingClaimsCount = claims.filter((c) => myItemIds.includes(c.itemId)).length;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4FAFD]">
+    <div className="min-h-screen flex flex-col bg-slate-100 text-slate-900">
       {/* Header */}
       <Header
         searchQuery={searchQuery}
@@ -137,79 +194,116 @@ export function App() {
         pendingClaimsCount={pendingClaimsCount}
       />
 
-      {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* FTU Hero Banner */}
-        <div className="relative rounded-3xl overflow-hidden mb-8 p-6 sm:p-8 bg-gradient-to-br from-rose-950 via-red-900 to-rose-900 text-white shadow-xl border border-rose-800/40">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative z-10 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 backdrop-blur-md text-amber-300 border border-white/15 text-xs font-bold mb-3">
-              <GraduationCap className="w-4 h-4 text-amber-400" />
-              <span>Cộng đồng FTUers • Trường Đại học Ngoại thương Hà Nội</span>
-            </div>
-            <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
-              Tìm lại đồ thất lạc dễ dàng tại FTU (91 Chùa Láng)
-            </h1>
-            <p className="mt-2.5 text-xs sm:text-sm text-rose-100 font-medium leading-relaxed">
-              Kênh thông tin trực tuyến dành riêng cho sinh viên Ngoại thương kết nối tìm lại Thẻ sinh viên FTU, Ví tiền, Chìa khóa xe, AirPods, Giáo trình... tại Giảng đường A, B, Thư viện và Căng tin FTU.
-            </p>
+      {/* Main Social Container - 3 Column Layout */}
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="grid grid-cols-12 gap-6 items-start">
+          {/* Left Column: Social Profile & Category Navigation */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-24">
+            <LeftSidebar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+              onOpenDashboard={() => setIsDashboardOpen(true)}
+              myPostsCount={myPostsCount}
+            />
           </div>
-        </div>
 
-        {/* Filter Bar Component */}
-        <FilterBar
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          selectedLocation={selectedLocation}
-          setSelectedLocation={setSelectedLocation}
-          totalCount={filteredItems.length}
-          onReset={() => {
-            setActiveTab('all');
-            setSelectedCategory('');
-            setSelectedLocation('');
-            setSearchQuery('');
-          }}
-        />
+          {/* Center Column: Social News Feed Stream (Scroll top to bottom) */}
+          <div className="col-span-12 lg:col-span-9 xl:col-span-6 space-y-6">
+            {/* FTU Hero Banner - Sharp Brutalist style */}
+            <div className="bg-rose-900 text-white p-6 border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white text-rose-950 font-black text-xs border border-slate-900 mb-3">
+                <GraduationCap className="w-4 h-4 text-rose-900" />
+                <span>MẠNG XÃ HỘI TÌM ĐỒ THẤT LẠC • FTU HANOI</span>
+              </div>
+              <h1 className="text-xl sm:text-3xl font-black tracking-tight leading-tight">
+                UniFind FTU Hanoi (91 Chùa Láng)
+              </h1>
+              <p className="mt-2 text-xs sm:text-sm text-rose-100 font-semibold leading-relaxed">
+                Đăng tin, thả tim và trao đổi trực tiếp với bạn bè Ngoại thương để tìm lại đồ thất lạc nhanh chóng!
+              </p>
+            </div>
 
-        {/* Grid Feed Section */}
-        {filteredItems.length === 0 ? (
-          <div className="text-center py-20 px-4 glass-card rounded-3xl my-6">
-            <Inbox className="w-16 h-16 text-slate-300 mx-auto mb-4" />
-            <h3 className="text-lg font-bold text-slate-800">Không tìm thấy bài viết phù hợp tại FTU</h3>
-            <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto mt-1">
-              Thử tìm theo từ khóa khác hoặc đặt lại bộ lọc để xem các bài tin khác của sinh viên Ngoại thương.
-            </p>
-            <button
-              onClick={() => {
+            {/* Quick Post Creator Box */}
+            <QuickPostBox onOpenCreateModal={() => setIsCreateModalOpen(true)} />
+
+            {/* Filter Bar Component */}
+            <FilterBar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+              selectedLocation={selectedLocation}
+              setSelectedLocation={setSelectedLocation}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              totalCount={filteredItems.length}
+              onReset={() => {
                 setActiveTab('all');
                 setSelectedCategory('');
                 setSelectedLocation('');
                 setSearchQuery('');
+                setStartDate('');
+                setEndDate('');
               }}
-              className="mt-4 px-4 py-2 rounded-xl bg-rose-700 text-white font-bold text-xs hover:bg-rose-800 transition-colors"
-            >
-              Đặt lại tất cả bộ lọc
-            </button>
+            />
+
+            {/* Social News Feed Stream */}
+            {filteredItems.length === 0 ? (
+              <div className="text-center py-16 px-4 bg-white border-2 border-slate-900 shadow-[4px_4px_0px_0px_rgba(15,23,42,0.9)] my-6">
+                <Inbox className="w-14 h-14 text-slate-400 mx-auto mb-3" />
+                <h3 className="text-base font-black text-slate-900">Không tìm thấy bài viết phù hợp</h3>
+                <p className="text-xs text-slate-600 max-w-md mx-auto mt-1 font-semibold">
+                  Thử tìm theo từ khóa khác hoặc đặt lại bộ lọc để xem các bài đăng khác của sinh viên FTU.
+                </p>
+                <button
+                  onClick={() => {
+                    setActiveTab('all');
+                    setSelectedCategory('');
+                    setSelectedLocation('');
+                    setSearchQuery('');
+                    setStartDate('');
+                    setEndDate('');
+                  }}
+                  className="mt-4 px-4 py-2 bg-rose-900 text-white font-extrabold text-xs hover:bg-rose-800 transition-colors border border-slate-900"
+                >
+                  Đặt lại tất cả bộ lọc
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {filteredItems.map((item) => (
+                  <ItemCard
+                    key={item.id}
+                    item={item}
+                    onSelect={setSelectedItem}
+                    onToggleLike={handleToggleLike}
+                    onAddComment={handleAddComment}
+                    addToast={addToast}
+                  />
+                ))}
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredItems.map((item) => (
-              <ItemCard key={item.id} item={item} onSelect={setSelectedItem} />
-            ))}
+
+          {/* Right Column: Widgets, Urgent Items, Impact Stats */}
+          <div className="hidden xl:block xl:col-span-3 sticky top-24">
+            <RightSidebar items={items} onSelectItem={setSelectedItem} />
           </div>
-        )}
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="w-full glass-panel border-t border-rose-100/60 mt-16 py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      {/* Footer Sharp */}
+      <footer className="w-full bg-white border-t-2 border-slate-900 mt-16 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-700 font-semibold">
           <div className="flex items-center gap-2">
-            <span className="font-extrabold text-rose-900">UniFind FTU Hanoi</span>
-            <span>• Nền tảng Tìm đồ Thất lạc ĐH Ngoại thương</span>
+            <span className="font-black text-rose-900">UniFind FTU Social Feed</span>
+            <span>• Nền tảng Mạng xã hội Tìm đồ Thất lạc ĐH Ngoại thương</span>
           </div>
-          <div className="flex items-center gap-1 text-slate-600 font-medium">
+          <div className="flex items-center gap-1 text-slate-600 font-bold">
             <span>Địa chỉ: 91 Chùa Láng, Đống Đa, Hà Nội</span>
           </div>
         </div>

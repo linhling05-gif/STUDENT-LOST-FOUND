@@ -13,15 +13,26 @@ export type Category =
   | 'Khác';
 
 export type LocationArea =
-  | 'Nhà A (Giảng đường A)'
-  | 'Nhà B (Giảng đường B)'
-  | 'Thư viện FTU (Tầng 2-3 Nhà A)'
+  | 'Tòa A'
+  | 'Tòa B'
+  | 'Thư viện FTU'
   | 'Căng tin FTU'
-  | 'Nhà xe cổng Chùa Láng'
-  | 'Sân nhà D / Sân thể thao'
+  | 'Nhà xe'
+  | 'Cổng trường'
+  | 'Sân nhà D'
   | 'Hội trường D201'
   | 'Ký túc xá FTU'
   | 'Khác';
+
+export interface Comment {
+  id: string;
+  itemId: string;
+  authorName: string;
+  authorClass?: string;
+  authorAvatar?: string;
+  content: string;
+  createdAt: string;
+}
 
 export interface Item {
   id: string;
@@ -39,6 +50,13 @@ export interface Item {
   contactSocial?: string;
   ownerId: string;
   createdAt: string;
+  // Social feed fields
+  authorClass?: string;
+  authorAvatar?: string;
+  likesCount?: number;
+  userLiked?: boolean;
+  comments?: Comment[];
+  isUrgent?: boolean;
 }
 
 export interface ClaimRequest {
@@ -56,3 +74,4 @@ export interface ToastMessage {
   title: string;
   message: string;
 }
+
